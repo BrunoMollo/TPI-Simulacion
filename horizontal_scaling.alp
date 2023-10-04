@@ -4,10 +4,10 @@
 	         AnyLogic Project File 
 *************************************************	         
 -->
-<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.8.3.202304281216" AlpVersion="8.7.7">
+<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.8.3.202304281219" AlpVersion="8.7.7">
 <Model>
 	<Id>1694552513478</Id>
-	<Name><![CDATA[mm1_as_servers]]></Name>
+	<Name><![CDATA[horizontal_scaling]]></Name>
 	<EngineVersion>6</EngineVersion>
 	<JavaPackageName><![CDATA[mm1_as_servers]]></JavaPackageName>
 	<ModelTimeUnit><![CDATA[Second]]></ModelTimeUnit>
@@ -478,166 +478,6 @@ if(number_of_servers>1 && ram_usage()<min_ram){
 }]]></Body>
 				</Function>
 			</Functions>
-			<Schedules>
-				<Schedule>
-					<Id>1695038583029</Id>
-					<Name><![CDATA[schedule]]></Name>
-					<X>130</X><Y>550</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<ValueType>double_</ValueType>
-					<UnitType><![CDATA[RATE]]></UnitType>
-					<UnitOfValue Class="RateUnits"><![CDATA[PER_SECOND]]></UnitOfValue>
-					<DefaultValue>0.0</DefaultValue>
-					<RepresentationMode>intervals</RepresentationMode>
-					<RepresentationType>calendar</RepresentationType>
-					<FirstDayOfWeek>sunday</FirstDayOfWeek>
-					<TimeUnitsInterval>hours</TimeUnitsInterval>
-					<RepeatTime>86400000</RepeatTime>
-					<RepeatTimeInterval>days</RepeatTimeInterval>
-					<IsSnapTo>false</IsSnapTo>
-					<SnapTo>1695038894454</SnapTo>
-					<SnapToTimeUnits>minutes</SnapToTimeUnits>
-					<AllDayExceptionMode>false</AllDayExceptionMode>
-					<LoadFromDatabase><![CDATA[false]]></LoadFromDatabase>
-					<IntervalsQuery>
-						<TableReference>
-						</TableReference>
-							<StartColumnReference>
-							</StartColumnReference>
-							<EndColumnReference>
-							</EndColumnReference>
-							<ValueColumnReference>
-							</ValueColumnReference>
-					</IntervalsQuery>
-					<Intervals>
-						<Interval>
-							<Start>0</Start>
-							<End>3600000</End>
-							<Value>150.0</Value>
-						</Interval>
-						<Interval>
-							<Start>3600000</Start>
-							<End>7200000</End>
-							<Value>125.0</Value>
-						</Interval>
-						<Interval>
-							<Start>7200000</Start>
-							<End>10800000</End>
-							<Value>100.0</Value>
-						</Interval>
-						<Interval>
-							<Start>10800000</Start>
-							<End>14400000</End>
-							<Value>80.0</Value>
-						</Interval>
-						<Interval>
-							<Start>14400000</Start>
-							<End>18000000</End>
-							<Value>70.0</Value>
-						</Interval>
-						<Interval>
-							<Start>18000000</Start>
-							<End>21600000</End>
-							<Value>80.0</Value>
-						</Interval>
-						<Interval>
-							<Start>21600000</Start>
-							<End>25200000</End>
-							<Value>110.0</Value>
-						</Interval>
-						<Interval>
-							<Start>25200000</Start>
-							<End>28800000</End>
-							<Value>125.0</Value>
-						</Interval>
-						<Interval>
-							<Start>28800000</Start>
-							<End>32400000</End>
-							<Value>150.0</Value>
-						</Interval>
-						<Interval>
-							<Start>32400000</Start>
-							<End>36000000</End>
-							<Value>160.0</Value>
-						</Interval>
-						<Interval>
-							<Start>36000000</Start>
-							<End>39600000</End>
-							<Value>160.0</Value>
-						</Interval>
-						<Interval>
-							<Start>39600000</Start>
-							<End>43200000</End>
-							<Value>160.0</Value>
-						</Interval>
-						<Interval>
-							<Start>43200000</Start>
-							<End>46800000</End>
-							<Value>175.0</Value>
-						</Interval>
-						<Interval>
-							<Start>46800000</Start>
-							<End>50400000</End>
-							<Value>180.0</Value>
-						</Interval>
-						<Interval>
-							<Start>50400000</Start>
-							<End>54000000</End>
-							<Value>190.0</Value>
-						</Interval>
-						<Interval>
-							<Start>54000000</Start>
-							<End>57600000</End>
-							<Value>200.0</Value>
-						</Interval>
-						<Interval>
-							<Start>57600000</Start>
-							<End>61200000</End>
-							<Value>200.0</Value>
-						</Interval>
-						<Interval>
-							<Start>61200000</Start>
-							<End>64800000</End>
-							<Value>210.0</Value>
-						</Interval>
-						<Interval>
-							<Start>64800000</Start>
-							<End>68400000</End>
-							<Value>225.0</Value>
-						</Interval>
-						<Interval>
-							<Start>68400000</Start>
-							<End>72000000</End>
-							<Value>255.0</Value>
-						</Interval>
-						<Interval>
-							<Start>72000000</Start>
-							<End>75600000</End>
-							<Value>265.0</Value>
-						</Interval>
-						<Interval>
-							<Start>75600000</Start>
-							<End>79200000</End>
-							<Value>250.0</Value>
-						</Interval>
-						<Interval>
-							<Start>79200000</Start>
-							<End>82800000</End>
-							<Value>220.0</Value>
-						</Interval>
-						<Interval>
-							<Start>82800000</Start>
-							<End>86400000</End>
-							<Value>180.0</Value>
-						</Interval>
-					</Intervals>
-					<Exceptions>
-					</Exceptions>
-				</Schedule>
-			</Schedules>
 			<AgentLinks>
 				<AgentLink>
 					<Id>1694552513482</Id>
@@ -683,14 +523,11 @@ if(number_of_servers>1 && ram_usage()<min_ram){
 					<Parameters>
 						<Parameter>
 							<Name><![CDATA[arrivalType]]></Name>
-							<Value Class="CodeValue">
-								<Code><![CDATA[self.RATE_SCHEDULE]]></Code>
-							</Value>
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[rate]]></Name>
 							<Value Class="CodeUnitValue">
-								<Code><![CDATA[sche]]></Code>
+								<Code><![CDATA[request_per_second]]></Code>
 								<Unit Class="RateUnits"><![CDATA[PER_SECOND]]></Unit>
 							</Value>
 						</Parameter>
