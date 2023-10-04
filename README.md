@@ -7,12 +7,12 @@ Viendo la proliferación de las arquitecturas apoyadas en la nube, es necesario 
 
 En este repositorio subiremos el archivo .alp generado por AnyLogic (el cuál tendrá la simulación) y el paper (o informe) en formato .pdf del trabajo práctico integrador.
 
-# Integrantes
-- Facundo "Fernet-Branca" Braida, 46095
-- Ramiro "El rama" Di Giacinti, 47772
-- Bruno "Brolly" Mollo, 47773
-- Adriel "Goro" Gorosito, 47066
-- Lucía "Lu" Cappellini, 47799
+# Integrantes           Legajo
+- Facundo Braida        46095
+- Ramiro Di Giacinti    47772
+- Bruno Mollo           47773
+- Adriel Gorosito       47066
+- Lucía Cappellini      47799
 
 # Profesores:
 -  Torres, Juan Ignacio
