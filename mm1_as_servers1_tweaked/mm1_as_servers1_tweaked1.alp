@@ -7,7 +7,7 @@
 <AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.8.4.202307181718" AlpVersion="8.8.2">
 <Model>
 	<Id>1694552513478</Id>
-	<Name><![CDATA[mm1_as_servers1_tweaked]]></Name>
+	<Name><![CDATA[mm1_as_servers1_tweaked1]]></Name>
 	<EngineVersion>6</EngineVersion>
 	<JavaPackageName><![CDATA[mm1_as_servers_tweaked]]></JavaPackageName>
 	<ModelTimeUnit><![CDATA[Minute]]></ModelTimeUnit>
@@ -119,7 +119,7 @@
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[int]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA[2]]></Code>
+							<Code><![CDATA[6]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -151,7 +151,7 @@
 						<UnitType><![CDATA[NONE]]></UnitType>
 						<SdArray>false</SdArray>
 						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[3200]]></Code>
+							<Code><![CDATA[320]]></Code>
 						</DefaultValue>
 						<ParameterEditor>
 							<Id>1694554575010</Id>
@@ -251,6 +251,27 @@
 						</DefaultValue>
 						<ParameterEditor>
 							<Id>1695160789435</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1696717349626</Id>
+					<Name><![CDATA[server_instance_limit]]></Name>
+					<X>50</X><Y>190</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<ParameterEditor>
+							<Id>1696717349624</Id>
 							<EditorContolType>TEXT_BOX</EditorContolType>
 							<MinSliderValue><![CDATA[0]]></MinSliderValue>
 							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
@@ -458,6 +479,72 @@
 						<Point><X>40</X><Y>50</Y></Point>
 					</Points>
 				</Connector>
+				<Connector>
+					<Id>1696439034723</Id>
+					<Name><![CDATA[connector4]]></Name>
+					<X>160</X><Y>230</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<SourceEmbeddedObjectReference>
+						<PackageName><![CDATA[mm1_as_servers_tweaked]]></PackageName>
+						<ClassName><![CDATA[Main]]></ClassName>
+						<ItemName><![CDATA[timeout]]></ItemName>
+					</SourceEmbeddedObjectReference>
+					<SourceConnectableItemReference>
+						<PackageName><![CDATA[com.anylogic.libraries.processmodeling]]></PackageName>
+						<ClassName><![CDATA[Sink]]></ClassName>
+						<ItemName><![CDATA[in]]></ItemName>
+					</SourceConnectableItemReference>
+					<TargetEmbeddedObjectReference>
+						<PackageName><![CDATA[mm1_as_servers_tweaked]]></PackageName>
+						<ClassName><![CDATA[Main]]></ClassName>
+						<ItemName><![CDATA[seize]]></ItemName>
+					</TargetEmbeddedObjectReference>
+					<TargetConnectableItemReference>
+						<PackageName><![CDATA[com.anylogic.libraries.processmodeling]]></PackageName>
+						<ClassName><![CDATA[Seize]]></ClassName>
+						<ItemName><![CDATA[outPreempted]]></ItemName>
+					</TargetConnectableItemReference>
+					<Points>
+						<Point><X>0</X><Y>0</Y></Point>
+						<Point><X>-10</X><Y>50</Y></Point>
+					</Points>
+				</Connector>
+				<Connector>
+					<Id>1696439373328</Id>
+					<Name><![CDATA[connector7]]></Name>
+					<X>160</X><Y>230</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<SourceEmbeddedObjectReference>
+						<PackageName><![CDATA[mm1_as_servers_tweaked]]></PackageName>
+						<ClassName><![CDATA[Main]]></ClassName>
+						<ItemName><![CDATA[timeout]]></ItemName>
+					</SourceEmbeddedObjectReference>
+					<SourceConnectableItemReference>
+						<PackageName><![CDATA[com.anylogic.libraries.processmodeling]]></PackageName>
+						<ClassName><![CDATA[Sink]]></ClassName>
+						<ItemName><![CDATA[in]]></ItemName>
+					</SourceConnectableItemReference>
+					<TargetEmbeddedObjectReference>
+						<PackageName><![CDATA[mm1_as_servers_tweaked]]></PackageName>
+						<ClassName><![CDATA[Main]]></ClassName>
+						<ItemName><![CDATA[seize]]></ItemName>
+					</TargetEmbeddedObjectReference>
+					<TargetConnectableItemReference>
+						<PackageName><![CDATA[com.anylogic.libraries.processmodeling]]></PackageName>
+						<ClassName><![CDATA[Seize]]></ClassName>
+						<ItemName><![CDATA[outTimeout]]></ItemName>
+					</TargetConnectableItemReference>
+					<Points>
+						<Point><X>0</X><Y>0</Y></Point>
+						<Point><X>0</X><Y>50</Y></Point>
+					</Points>
+				</Connector>
 			</Connectors>
 			<Events>
 				<Event>
@@ -489,11 +576,11 @@
 						</RecurrenceCode>
 						<Condition><![CDATA[false]]></Condition>
 					</Properties>
-					<Action><![CDATA[if(!waiting_for_startup && last_hour_ram_usage()>max_ram){
+					<Action><![CDATA[if(!waiting_for_startup && number_of_servers < server_instance_limit && average_last_hour_ram_usage()>max_ram){
 	create_spin_up_server(server_startup_delay);
 	waiting_for_startup=true;
 }
-if(!waiting_for_startup && number_of_servers>1 && last_hour_ram_usage()<min_ram){
+if(!waiting_for_startup && number_of_servers>1 && average_last_hour_ram_usage()<min_ram){
 	create_shutdown_server(0);
 	waiting_for_startup=false;
 }]]></Action>
@@ -532,25 +619,38 @@ waiting_for_startup=false;]]></Action>
 					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1695247557279</Id>
-					<Name><![CDATA[last_hour_ram_usage]]></Name>
+					<Name><![CDATA[average_last_hour_ram_usage]]></Name>
 					<X>310</X><Y>70</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[return (delay.size()*schedule()/(ram_per_server*number_of_servers))*100;]]></Body>
+					<Body><![CDATA[return (last_hour_ram_usage.getYMean()/(ram_per_server*number_of_servers))*100;]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1696421132788</Id>
 					<Name><![CDATA[getDelayPacket]]></Name>
-					<X>230</X><Y>220</Y>
+					<X>160</X><Y>20</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Body><![CDATA[return schedule()/(number_of_servers*100);]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[int]]></ReturnType>
+					<Id>1696709217191</Id>
+					<Name><![CDATA[getRamPacket]]></Name>
+					<X>160</X><Y>50</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[int value = (int) Math.floor(abs(normal(300,60)));
+return value;]]></Body>
 				</Function>
 			</Functions>
 			<Schedules>
@@ -579,12 +679,23 @@ waiting_for_startup=false;]]></Action>
 					<LoadFromDatabase><![CDATA[false]]></LoadFromDatabase>
 					<IntervalsQuery>
 						<TableReference>
+							<PackageName><![CDATA[mm1_as_servers_tweaked]]></PackageName>
+							<ClassName><![CDATA[sheet1]]></ClassName>
 						</TableReference>
 							<StartColumnReference>
+								<PackageName><![CDATA[mm1_as_servers_tweaked]]></PackageName>
+								<ClassName><![CDATA[sheet1]]></ClassName>
+								<ItemName><![CDATA[hora_ini]]></ItemName>
 							</StartColumnReference>
 							<EndColumnReference>
+								<PackageName><![CDATA[mm1_as_servers_tweaked]]></PackageName>
+								<ClassName><![CDATA[sheet1]]></ClassName>
+								<ItemName><![CDATA[hora_fin]]></ItemName>
 							</EndColumnReference>
 							<ValueColumnReference>
+								<PackageName><![CDATA[mm1_as_servers_tweaked]]></PackageName>
+								<ClassName><![CDATA[sheet1]]></ClassName>
+								<ItemName><![CDATA[valor]]></ItemName>
 							</ValueColumnReference>
 					</IntervalsQuery>
 					<Intervals>
@@ -713,6 +824,31 @@ waiting_for_startup=false;]]></Action>
 					</Exceptions>
 				</Schedule>
 			</Schedules>
+			<AnalysisData>
+    			<DataSet>
+					<Id>1696710086510</Id>
+					<Name><![CDATA[last_hour_ram_usage]]></Name>
+					<X>500</X><Y>-160</Y>
+					<Label><X>15</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<AutoUpdate>true</AutoUpdate>
+					<OccurrenceAtTime>true</OccurrenceAtTime>
+					<OccurrenceDate>1696752000000</OccurrenceDate>
+					<OccurrenceTime Class="CodeUnitValue">
+						<Code><![CDATA[0]]></Code>
+						<Unit Class="TimeUnits"><![CDATA[MINUTE]]></Unit>
+					</OccurrenceTime>
+					<RecurrenceCode Class="CodeUnitValue">
+						<Code><![CDATA[1]]></Code>
+						<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
+					</RecurrenceCode>
+					<FreezeXAxis>true</FreezeXAxis>
+					<VerticalAxisExpression><![CDATA[ram.busy()]]></VerticalAxisExpression>
+					<SamplesToKeep>60</SamplesToKeep>
+				</DataSet>
+			</AnalysisData>
 			<AgentLinks>
 				<AgentLink>
 					<Id>1694552513482</Id>
@@ -1014,7 +1150,7 @@ waiting_for_startup=false;]]></Action>
 				<EmbeddedObject>
 					<Id>1694552644775</Id>
 					<Name><![CDATA[ram]]></Name>
-					<X>140</X><Y>210</Y>
+					<X>50</X><Y>60</Y>
 					<Label><X>10</X><Y>-10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1040,7 +1176,7 @@ waiting_for_startup=false;]]></Action>
 						<Parameter>
 							<Name><![CDATA[capacity]]></Name>
 							<Value Class="CodeValue">
-								<Code><![CDATA[ram_per_server* number_of_servers
+								<Code><![CDATA[ram_per_server * number_of_servers
 ]]></Code>
 							</Value>
 						</Parameter>
@@ -1284,7 +1420,7 @@ waiting_for_startup=false;]]></Action>
 					<Id>1694557760652</Id>
 					<Name><![CDATA[start]]></Name>
 					<X>83</X><Y>320</Y>
-					<Label><X>-15</X><Y>-10</Y></Label>
+					<Label><X>-8</X><Y>35</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
@@ -1371,6 +1507,9 @@ waiting_for_startup=false;]]></Action>
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[datasetCapacity]]></Name>
+							<Value Class="CodeValue">
+								<Code><![CDATA[60]]></Code>
+							</Value>
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[onEnter]]></Name>
@@ -1419,7 +1558,7 @@ waiting_for_startup=false;]]></Action>
 					<Id>1696420885229</Id>
 					<Name><![CDATA[seize]]></Name>
 					<X>130</X><Y>270</Y>
-					<Label><X>0</X><Y>-10</Y></Label>
+					<Label><X>-20</X><Y>-5</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
@@ -1459,7 +1598,7 @@ waiting_for_startup=false;]]></Action>
 						<Parameter>
 							<Name><![CDATA[resourceQuantity]]></Name>
 							<Value Class="CodeValue">
-								<Code><![CDATA[(int) Math.floor(schedule())]]></Code>
+								<Code><![CDATA[getRamPacket()]]></Code>
 							</Value>
 						</Parameter>
 						<Parameter>
@@ -1551,6 +1690,9 @@ waiting_for_startup=false;]]></Action>
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[enableTimeout]]></Name>
+							<Value Class="CodeValue">
+								<Code><![CDATA[true]]></Code>
+							</Value>
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[timeout]]></Name>
@@ -1675,12 +1817,15 @@ waiting_for_startup=false;]]></Action>
 						<Parameter>
 							<Name><![CDATA[delayTime]]></Name>
 							<Value Class="CodeUnitValue">
-								<Code><![CDATA[getDelayPacket()]]></Code>
-								<Unit Class="TimeUnits"><![CDATA[MINUTE]]></Unit>
+								<Code><![CDATA[3.5]]></Code>
+								<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
 							</Value>
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[capacity]]></Name>
+							<Value Class="CodeValue">
+								<Code><![CDATA[64*number_of_servers]]></Code>
+							</Value>
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[maximumCapacity]]></Name>
@@ -1789,21 +1934,33 @@ waiting_for_startup=false;]]></Action>
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[movingGoHome]]></Name>
+							<Value Class="CodeValue">
+								<Code><![CDATA[false]]></Code>
+							</Value>
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[wrapUpTaskPolicyType]]></Name>
+							<Value Class="CodeValue">
+								<Code><![CDATA[self.WRAP_UP_IF_NO_TASKS]]></Code>
+							</Value>
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[wrapUpTaskPriority]]></Name>
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[wrapUpTaskMayPreemptOtherTasks]]></Name>
+							<Value Class="CodeValue">
+								<Code><![CDATA[false]]></Code>
+							</Value>
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[wrapUpTaskPreemptionPolicy]]></Name>
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[wrapUpUsageState]]></Name>
+							<Value Class="CodeValue">
+								<Code><![CDATA[self.USAGE_NOT_COUNTED]]></Code>
+							</Value>
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[onEnter]]></Name>
@@ -1816,6 +1973,72 @@ waiting_for_startup=false;]]></Action>
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[onWrapUpTerminated]]></Name>
+						</Parameter>
+					</Parameters>
+					<ReplicationFlag>false</ReplicationFlag>
+					<Replication Class="CodeValue">
+						<Code><![CDATA[100]]></Code>
+					</Replication>
+					<CollectionType>ARRAY_LIST_BASED</CollectionType>
+					<InitialLocationType>AT_ANIMATION_POSITION</InitialLocationType>
+					<XCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</XCode>
+					<YCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</YCode>
+					<ZCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</ZCode>
+					<ColumnCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</ColumnCode>
+					<RowCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</RowCode>
+					<LatitudeCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</LatitudeCode>
+					<LongitudeCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</LongitudeCode>
+					<LocationNameCode Class="CodeValue">
+						<Code><![CDATA[""]]></Code>
+					</LocationNameCode>
+					<InitializationType>SPECIFIED_NUMBER</InitializationType>
+					<InitializationDatabaseTableQuery>
+						<TableReference>
+						</TableReference>
+					</InitializationDatabaseTableQuery>
+					<InitializationDatabaseType>ONE_AGENT_PER_DATABASE_RECORD</InitializationDatabaseType>
+					<QuantityColumn>
+					</QuantityColumn>
+				</EmbeddedObject>
+				<EmbeddedObject>
+					<Id>1696439032695</Id>
+					<Name><![CDATA[timeout]]></Name>
+					<X>160</X><Y>220</Y>
+					<Label><X>20</X><Y>-5</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<ActiveObjectClass>
+						<PackageName><![CDATA[com.anylogic.libraries.processmodeling]]></PackageName>
+						<ClassName><![CDATA[Sink]]></ClassName>
+					</ActiveObjectClass>
+					<GenericParameterSubstitute>
+						<GenericParameterSubstituteReference>
+							<PackageName><![CDATA[com.anylogic.libraries.processmodeling]]></PackageName>
+							<ClassName><![CDATA[Sink]]></ClassName>
+							<ItemName><![CDATA[1412336242929]]></ItemName>
+						</GenericParameterSubstituteReference>
+					</GenericParameterSubstitute>
+					<Parameters>
+						<Parameter>
+							<Name><![CDATA[onEnter]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[destroyEntity]]></Name>
 						</Parameter>
 					</Parameters>
 					<ReplicationFlag>false</ReplicationFlag>
@@ -1930,7 +2153,7 @@ waiting_for_startup=false;]]></Action>
 					<Id>1696420158800</Id>
 					<Expression><![CDATA[my_dataset1]]></Expression>
 					<Color>-16728065</Color>
-					<Expression2><![CDATA[last_hour_ram_usage()]]></Expression2>
+					<Expression2><![CDATA[average_last_hour_ram_usage()]]></Expression2>
 					<Expression2Flag>true</Expression2Flag>
 						<PointStyle>NONE</PointStyle>
 						<LineWidth>1.0</LineWidth>
@@ -2020,8 +2243,8 @@ waiting_for_startup=false;]]></Action>
 					<OccurrenceAtTime>true</OccurrenceAtTime>
 					<OccurrenceDate>1694592000000</OccurrenceDate>
 					<OccurrenceTime Class="CodeUnitValue">
-						<Code><![CDATA[1]]></Code>
-						<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
+						<Code><![CDATA[0]]></Code>
+						<Unit Class="TimeUnits"><![CDATA[MINUTE]]></Unit>
 					</OccurrenceTime>
 					<RecurrenceCode Class="CodeUnitValue">
 						<Code><![CDATA[1]]></Code>
@@ -2069,15 +2292,15 @@ waiting_for_startup=false;]]></Action>
 						<PointStyle>NONE</PointStyle>
 						<LineWidth>1.0</LineWidth>
 					</DatasetExpression>
-					<SamplesToKeep>720</SamplesToKeep>
-					<TimeWindowExpression><![CDATA[12]]></TimeWindowExpression>
+					<SamplesToKeep>360</SamplesToKeep>
+					<TimeWindowExpression><![CDATA[6]]></TimeWindowExpression>
 					<FillAreaUnderLine>false</FillAreaUnderLine>
 					<LabelFormat>MODEL_TIME_UNITS</LabelFormat>
     			</TimePlot>
     			<Histogram>
 					<Id>1694558143619</Id>
 					<Name><![CDATA[chart]]></Name>
-					<X>60</X><Y>380</Y>
+					<X>0</X><Y>370</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2095,15 +2318,15 @@ waiting_for_startup=false;]]></Action>
 						<Unit Class="TimeUnits"><![CDATA[MINUTE]]></Unit>
 					</RecurrenceCode>
 					<EmbeddedIcon>false</EmbeddedIcon>
-					<Width>340</Width>
-					<Height>210</Height>
+					<Width>440</Width>
+					<Height>230</Height>
 					<BackgroundColor/>
 					<BorderColor/>
 					<ChartArea>
 						<XOffset>50</XOffset>
 						<YOffset>30</YOffset>
-						<Width>260</Width>
-						<Height>120</Height>
+						<Width>380</Width>
+						<Height>140</Height>
 						<BackgroundColor>-1</BackgroundColor>
 						<BorderColor>-16777216</BorderColor>
 						<GridColor>-12566464</GridColor>
@@ -2124,7 +2347,7 @@ waiting_for_startup=false;]]></Action>
 					<ShowMean>true</ShowMean>
 					<Bars>
 						<Direction>UP</Direction>
-						<RelativeWidth>0.5</RelativeWidth>
+						<RelativeWidth>0.2</RelativeWidth>
 					</Bars>
 					<HistogramDataExpression>
 					<Id>1694558143621</Id>
@@ -2205,6 +2428,130 @@ waiting_for_startup=false;]]></Action>
 					<FillAreaUnderLine>false</FillAreaUnderLine>
 					<LabelFormat>MODEL_TIME_UNITS</LabelFormat>
     			</TimePlot>
+    			<TimePlot>
+					<Id>1696711950196</Id>
+					<Name><![CDATA[plot5]]></Name>
+					<X>0</X><Y>600</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<AutoUpdate>true</AutoUpdate>
+					<OccurrenceAtTime>true</OccurrenceAtTime>
+					<OccurrenceDate>1696752000000</OccurrenceDate>
+					<OccurrenceTime Class="CodeUnitValue">
+						<Code><![CDATA[0]]></Code>
+						<Unit Class="TimeUnits"><![CDATA[MINUTE]]></Unit>
+					</OccurrenceTime>
+					<RecurrenceCode Class="CodeUnitValue">
+						<Code><![CDATA[1]]></Code>
+						<Unit Class="TimeUnits"><![CDATA[MINUTE]]></Unit>
+					</RecurrenceCode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Width>440</Width>
+					<Height>210</Height>
+					<BackgroundColor/>
+					<BorderColor/>
+					<ChartArea>
+						<XOffset>50</XOffset>
+						<YOffset>30</YOffset>
+						<Width>380</Width>
+						<Height>120</Height>
+						<BackgroundColor>-1</BackgroundColor>
+						<BorderColor>-16777216</BorderColor>
+						<GridColor>-12566464</GridColor>
+					</ChartArea>
+					<Legend>
+						<Place>SOUTH</Place>
+						<TextColor>-16777216</TextColor>
+						<Size>30</Size>
+					</Legend>
+					<Labels>
+						<HorLabelsPosition>DEFAULT</HorLabelsPosition>
+						<VerLabelsPosition>DEFAULT</VerLabelsPosition>
+						<TextColor>-12566464</TextColor>
+					</Labels>
+					<ShowLegend>true</ShowLegend>
+					<TimeWindowsMovementType>MOVEMENT_WITH_TIME</TimeWindowsMovementType>		
+					<TimeWindowUnits>MODEL_TIME_UNIT</TimeWindowUnits>
+					<VerScaleFromExpression><![CDATA[0]]></VerScaleFromExpression>
+					<VerScaleToExpression><![CDATA[1]]></VerScaleToExpression>
+					<VerScaleType>AUTO</VerScaleType>
+					<DrawLine>true</DrawLine>
+					<Interpolation>LINEAR</Interpolation>
+					<DatasetExpression>  
+						<Title><![CDATA[time_per_request (1hr)]]></Title>
+					<Id>1696711950616</Id>
+					<Expression><![CDATA[my_dataset]]></Expression>
+					<Color>-4565549</Color>
+					<Expression2><![CDATA[end.dataset.getYMean()]]></Expression2>
+					<Expression2Flag>true</Expression2Flag>
+						<PointStyle>NONE</PointStyle>
+						<LineWidth>1.0</LineWidth>
+					</DatasetExpression>
+					<SamplesToKeep>60</SamplesToKeep>
+					<TimeWindowExpression><![CDATA[60]]></TimeWindowExpression>
+					<FillAreaUnderLine>false</FillAreaUnderLine>
+					<LabelFormat>MODEL_TIME_UNITS</LabelFormat>
+    			</TimePlot>
+    			<PieChart>
+					<Id>1696712471859</Id>
+					<Name><![CDATA[chart1]]></Name>
+					<X>460</X><Y>620</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<AutoUpdate>true</AutoUpdate>
+					<OccurrenceAtTime>true</OccurrenceAtTime>
+					<OccurrenceDate>1696752000000</OccurrenceDate>
+					<OccurrenceTime Class="CodeUnitValue">
+						<Code><![CDATA[0]]></Code>
+						<Unit Class="TimeUnits"><![CDATA[MINUTE]]></Unit>
+					</OccurrenceTime>
+					<RecurrenceCode Class="CodeUnitValue">
+						<Code><![CDATA[1]]></Code>
+						<Unit Class="TimeUnits"><![CDATA[MINUTE]]></Unit>
+					</RecurrenceCode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Width>260</Width>
+					<Height>210</Height>
+					<BackgroundColor/>
+					<BorderColor/>
+					<ChartArea>
+						<XOffset>50</XOffset>
+						<YOffset>10</YOffset>
+						<Width>140</Width>
+						<Height>140</Height>
+						<BorderColor/>
+						<GridColor>-12566464</GridColor>
+					</ChartArea>
+					<Legend>
+						<Place>SOUTH</Place>
+						<TextColor>-16777216</TextColor>
+						<Size>40</Size>
+					</Legend>
+					<Labels>
+						<HorLabelsPosition>DEFAULT</HorLabelsPosition>
+						<VerLabelsPosition>DEFAULT</VerLabelsPosition>
+						<TextColor>-12566464</TextColor>
+					</Labels>
+					<ShowLegend>true</ShowLegend>
+					<DataItem>
+					<Id>1696712472906</Id>
+					<Expression><![CDATA[delay.in.count()]]></Expression>
+					<Color>-16711936</Color>
+						<Title><![CDATA[Accepted]]></Title>
+					</DataItem>
+					<DataItem>
+					<Id>1696712472907</Id>
+					<Expression><![CDATA[timeout.count()]]></Expression>
+					<Color>-65536</Color>
+						<Title><![CDATA[Rejected]]></Title>
+					</DataItem>
+    			</PieChart>
 			</Presentation>
 
 				</Level>
@@ -2228,6 +2575,36 @@ waiting_for_startup=false;]]></Action>
 		<AutoExport>false</AutoExport>
 		<ShutdownCompact>false</ShutdownCompact>
 		<ImportSettings>
+			<ExternalConnection>
+				<Id>1696708767053</Id>
+				<Name><![CDATA[database]]></Name>
+				<X>0</X><Y>0</Y>
+				<Label><X>10</X><Y>0</Y></Label>
+				<PublicFlag>false</PublicFlag>
+				<PresentationFlag>true</PresentationFlag>
+				<ShowLabel>true</ShowLabel>
+				<DatabaseType>EXCEL_ACCESS</DatabaseType>
+				<ConnectionURL><![CDATA[]]></ConnectionURL>
+				<ConnectOnStartup>true</ConnectOnStartup>
+				<DatabaseName><![CDATA[]]></DatabaseName>
+				<ResourceReference>
+					<PackageName><![CDATA[mm1_as_servers_tweaked]]></PackageName>
+					<ClassName><![CDATA[C:/Users/Ramiro/Desktop/anylogic3.xlsx]]></ClassName>
+				</ResourceReference>
+				<Host><![CDATA[localhost]]></Host>
+				<JdbcDriverClassName><![CDATA[net.sourceforge.jtds.jdbc.Driver]]></JdbcDriverClassName>
+				<Login><![CDATA[]]></Login>
+				<Password><![CDATA[]]></Password>
+			</ExternalConnection>
+			<TableImportSettings>
+				<TableReference>
+					<PackageName><![CDATA[mm1_as_servers_tweaked]]></PackageName>
+					<ClassName><![CDATA[sheet1]]></ClassName>
+				</TableReference>
+				<ConnectionIndex>0</ConnectionIndex>
+				<ExternalTableName><![CDATA["Sheet1"]]></ExternalTableName>
+				<AutoImport>false</AutoImport>
+			</TableImportSettings>
 		</ImportSettings>
 		<ExportSettings>
 		</ExportSettings>
@@ -2361,16 +2738,16 @@ getExperimentHost().setPresentable( getEngine().getRoot() );]]></ActionCode>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
 					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<BasicProperties Width="308.272" Height="64.683">
+					<BasicProperties Width="308" Height="64">
                         <EmbeddedIcon>false</EmbeddedIcon>	
 						<Enabled>true</Enabled>
 					</BasicProperties>
 					<ExtendedProperties>
-						<DefaultValueCode><![CDATA[3200]]></DefaultValueCode>
+						<DefaultValueCode><![CDATA[320]]></DefaultValueCode>
 						<Orientation>HORIZONTAL</Orientation>
-						<MinValue><![CDATA[1600]]></MinValue>
-						<MaxValue><![CDATA[6400]]></MaxValue>
-						<Step><![CDATA[400]]></Step>
+						<MinValue><![CDATA[160]]></MinValue>
+						<MaxValue><![CDATA[640]]></MaxValue>
+						<Step><![CDATA[40]]></Step>
 						<LinkTo>false</LinkTo>
 					</ExtendedProperties>
 				</Control>
@@ -2387,7 +2764,7 @@ getExperimentHost().setPresentable( getEngine().getRoot() );]]></ActionCode>
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
 					<Color>-16777216</Color>
-					<Text><![CDATA[ram_per_server]]></Text>
+					<Text><![CDATA[ram_per_server [x100 MB]]]></Text>
 					<Font>
 						<Name>SansSerif</Name>
 						<Size>10</Size>
@@ -2488,7 +2865,7 @@ getExperimentHost().setPresentable( getEngine().getRoot() );]]></ActionCode>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
 					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<BasicProperties Width="311.959" Height="65.363">
+					<BasicProperties Width="311" Height="65">
                         <EmbeddedIcon>false</EmbeddedIcon>	
 						<Enabled>true</Enabled>
 					</BasicProperties>
@@ -2514,7 +2891,8 @@ getExperimentHost().setPresentable( getEngine().getRoot() );]]></ActionCode>
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
 					<Color>-16777216</Color>
-					<Text><![CDATA[max_ram]]></Text>
+					<Text><![CDATA[max_ram [%]
+]]></Text>
 					<Font>
 						<Name>SansSerif</Name>
 						<Size>10</Size>
@@ -2615,12 +2993,12 @@ getExperimentHost().setPresentable( getEngine().getRoot() );]]></ActionCode>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
 					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<BasicProperties Width="308.12" Height="64.495">
+					<BasicProperties Width="308" Height="64">
                         <EmbeddedIcon>false</EmbeddedIcon>	
 						<Enabled>true</Enabled>
 					</BasicProperties>
 					<ExtendedProperties>
-						<DefaultValueCode><![CDATA[10]]></DefaultValueCode>
+						<DefaultValueCode><![CDATA[25]]></DefaultValueCode>
 						<Orientation>HORIZONTAL</Orientation>
 						<MinValue><![CDATA[1]]></MinValue>
 						<MaxValue><![CDATA[99]]></MaxValue>
@@ -2641,7 +3019,7 @@ getExperimentHost().setPresentable( getEngine().getRoot() );]]></ActionCode>
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
 					<Color>-16777216</Color>
-					<Text><![CDATA[min_ram]]></Text>
+					<Text><![CDATA[min_ram [%]]]></Text>
 					<Font>
 						<Name>SansSerif</Name>
 						<Size>10</Size>
@@ -2742,12 +3120,12 @@ getExperimentHost().setPresentable( getEngine().getRoot() );]]></ActionCode>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
 					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<BasicProperties Width="308.12" Height="64.495">
+					<BasicProperties Width="308" Height="64">
                         <EmbeddedIcon>false</EmbeddedIcon>	
 						<Enabled>true</Enabled>
 					</BasicProperties>
 					<ExtendedProperties>
-						<DefaultValueCode><![CDATA[3]]></DefaultValueCode>
+						<DefaultValueCode><![CDATA[5]]></DefaultValueCode>
 						<Orientation>HORIZONTAL</Orientation>
 						<MinValue><![CDATA[0]]></MinValue>
 						<MaxValue><![CDATA[60]]></MaxValue>
@@ -2768,7 +3146,7 @@ getExperimentHost().setPresentable( getEngine().getRoot() );]]></ActionCode>
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
 					<Color>-16777216</Color>
-					<Text><![CDATA[startup_delay]]></Text>
+					<Text><![CDATA[startup_delay [min]]]></Text>
 					<Font>
 						<Name>SansSerif</Name>
 						<Size>10</Size>
@@ -2869,12 +3247,12 @@ getExperimentHost().setPresentable( getEngine().getRoot() );]]></ActionCode>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
 					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<BasicProperties Width="308.12" Height="64.495">
+					<BasicProperties Width="308" Height="64">
                         <EmbeddedIcon>false</EmbeddedIcon>	
 						<Enabled>true</Enabled>
 					</BasicProperties>
 					<ExtendedProperties>
-						<DefaultValueCode><![CDATA[0]]></DefaultValueCode>
+						<DefaultValueCode><![CDATA[3]]></DefaultValueCode>
 						<Orientation>HORIZONTAL</Orientation>
 						<MinValue><![CDATA[0]]></MinValue>
 						<MaxValue><![CDATA[60]]></MaxValue>
@@ -2895,7 +3273,7 @@ getExperimentHost().setPresentable( getEngine().getRoot() );]]></ActionCode>
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
 					<Color>-16777216</Color>
-					<Text><![CDATA[shutdown_delay]]></Text>
+					<Text><![CDATA[shutdown_delay [min]]]></Text>
 					<Font>
 						<Name>SansSerif</Name>
 						<Size>10</Size>
@@ -2972,6 +3350,169 @@ getExperimentHost().setPresentable( getEngine().getRoot() );]]></ActionCode>
 			</Presentation>
 
 				</Group>
+				<Group>
+					<Id>1696717523713</Id>
+					<Name><![CDATA[group7]]></Name>
+					<X>270</X><Y>550</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+
+			<Presentation>
+				<Group>
+					<Id>1696717208516</Id>
+					<Name><![CDATA[group5]]></Name>
+					<X>-10</X><Y>-20</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+
+			<Presentation>
+				<Control Type="CheckBox">
+				 	<EmbeddedIcon>false</EmbeddedIcon>				
+					<Id>1696717167354</Id>
+					<Name><![CDATA[checkbox]]></Name>
+					<X>-160</X><Y>-40</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<BasicProperties Width="180" Height="30">
+                        <EmbeddedIcon>false</EmbeddedIcon>	
+						<TextColor/>
+						<Enabled>true</Enabled>
+					</BasicProperties>
+					<ExtendedProperties>
+						<Font Name="Dialog" Size="11" Style="0"/>
+						<LabelText><![CDATA[server_instance_limit]]></LabelText>
+						<LinkTo>false</LinkTo>
+	 				</ExtendedProperties>
+				</Control>
+				<Control Type="Slider">
+				 	<EmbeddedIcon>false</EmbeddedIcon>				
+					<Id>1696717066978</Id>
+					<Name><![CDATA[server_instance_limit_slider]]></Name>
+					<X>-148.462</X><Y>-35</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<BasicProperties Width="308" Height="64">
+                        <EmbeddedIcon>false</EmbeddedIcon>	
+						<VisibleCode><![CDATA[checkbox.isSelected()]]></VisibleCode>
+						<Enabled>true</Enabled>
+					</BasicProperties>
+					<ExtendedProperties>
+						<DefaultValueCode><![CDATA[5]]></DefaultValueCode>
+						<Orientation>HORIZONTAL</Orientation>
+						<MinValue><![CDATA[1]]></MinValue>
+						<MaxValue><![CDATA[100]]></MaxValue>
+						<Step><![CDATA[1]]></Step>
+						<LinkTo>false</LinkTo>
+					</ExtendedProperties>
+				</Control>
+			</Presentation>
+
+				</Group>
+				<Group>
+					<Id>1696717298131</Id>
+					<Name><![CDATA[group6]]></Name>
+					<X>0</X><Y>20</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<VisibleCode><![CDATA[checkbox.isSelected()]]></VisibleCode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+
+			<Presentation>
+				<Text>
+					<Id>1696717066982</Id>
+					<Name><![CDATA[text20]]></Name>
+					<X>-158.462</X><Y>-10.504999999999995</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[min]]></Text>
+					<TextCode><![CDATA[shutdown_delay_slider.getMin()]]></TextCode>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>10</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1696717066984</Id>
+					<Name><![CDATA[text21]]></Name>
+					<X>149.65800000000002</X><Y>-10.504999999999995</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[max]]></Text>
+					<TextCode><![CDATA[shutdown_delay_slider.getMax()]]></TextCode>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>10</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>RIGHT</Alignment>
+				</Text>
+				<Text>
+					<Id>1696717066986</Id>
+					<Name><![CDATA[text22]]></Name>
+					<X>-4.401999999999987</X><Y>-10.504999999999995</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[value]]></Text>
+					<TextCode><![CDATA[server_instance_limit_slider.getValue()]]></TextCode>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>10</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>CENTER</Alignment>
+				</Text>
+			</Presentation>
+
+				</Group>
+			</Presentation>
+
+				</Group>
 			</Presentation>
 
 			<Parameters>			
@@ -3005,11 +3546,17 @@ getExperimentHost().setPresentable( getEngine().getRoot() );]]></ActionCode>
 						<Code><![CDATA[shutdown_delay_slider.getIntValue()]]></Code>
 					</ParameterValue>
 				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[server_instance_limit]]></ParameterName>
+					<ParameterValue Class="CodeValue">
+						<Code><![CDATA[checkbox.isSelected()?server_instance_limit_slider.getIntValue():1000]]></Code>
+					</ParameterValue>
+				</Parameter>
 			</Parameters>			
 			<PresentationProperties>
 				<EnableZoomAndPanning>true</EnableZoomAndPanning>
 				<ExecutionMode><![CDATA[realTimeScaled]]></ExecutionMode>
-				<Title><![CDATA[mm1_as_servers : Simulation]]></Title>	
+				<Title><![CDATA[Horizontal server scaling : Simulacion 2023 UTN FRRo]]></Title>	
 				<EnableDeveloperPanel>true</EnableDeveloperPanel>
 				<ShowDeveloperPanelOnStart>false</ShowDeveloperPanelOnStart>
 				<RealTimeScale>5.0</RealTimeScale>
@@ -3027,6 +3574,18 @@ getExperimentHost().setPresentable( getEngine().getRoot() );]]></ActionCode>
 	<ModelResources>
 		<Resource>
 			<Path><![CDATA[image1.png]]></Path>
+			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+		</Resource>
+		<Resource>
+			<Path><![CDATA[C:/Users/Ramiro/Desktop/anylogic.xlsx]]></Path>
+			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+		</Resource>
+		<Resource>
+			<Path><![CDATA[C:/Users/Ramiro/Desktop/anylogic2.xlsx]]></Path>
+			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+		</Resource>
+		<Resource>
+			<Path><![CDATA[C:/Users/Ramiro/Desktop/anylogic3.xlsx]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
 		</Resource>
 	</ModelResources>
