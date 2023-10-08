@@ -4,7 +4,7 @@
 	         AnyLogic Project File 
 *************************************************	         
 -->
-<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.8.4.202307181718" AlpVersion="8.8.2">
+<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.8.4.202307181709" AlpVersion="8.8.2">
 <Model>
 	<Id>1694552513478</Id>
 	<Name><![CDATA[mm1_as_servers1_tweaked1]]></Name>
@@ -119,7 +119,7 @@
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[int]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA[6]]></Code>
+							<Code><![CDATA[1]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -576,13 +576,16 @@
 						</RecurrenceCode>
 						<Condition><![CDATA[false]]></Condition>
 					</Properties>
-					<Action><![CDATA[if(!waiting_for_startup && number_of_servers < server_instance_limit && average_last_hour_ram_usage()>max_ram){
-	create_spin_up_server(server_startup_delay);
-	waiting_for_startup=true;
-}
-if(!waiting_for_startup && number_of_servers>1 && average_last_hour_ram_usage()<min_ram){
-	create_shutdown_server(0);
-	waiting_for_startup=false;
+					<Action><![CDATA[if (!waiting_for_startup && number_of_servers < server_instance_limit) {
+    if (average_last_hour_ram_usage() > max_ram) {
+        create_spin_up_server(server_startup_delay);
+        waiting_for_startup = true;
+        number_of_servers++;
+    } else if (number_of_servers > 1 && average_last_hour_ram_usage() < min_ram) {
+        create_shutdown_server(0);
+        waiting_for_startup = false;
+        number_of_servers--;
+    }
 }]]></Action>
 				</Event>
 			</Events>
@@ -595,7 +598,7 @@ if(!waiting_for_startup && number_of_servers>1 && average_last_hour_ram_usage()<
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Action><![CDATA[number_of_servers++;
+					<Action><![CDATA[
 var new_capacity=ram_per_server*number_of_servers;
 ram.set_capacity(new_capacity);
 waiting_for_startup=false;]]></Action>
@@ -3574,14 +3577,6 @@ getExperimentHost().setPresentable( getEngine().getRoot() );]]></ActionCode>
 	<ModelResources>
 		<Resource>
 			<Path><![CDATA[image1.png]]></Path>
-			<ReferencedFromUserCode>false</ReferencedFromUserCode>
-		</Resource>
-		<Resource>
-			<Path><![CDATA[C:/Users/Ramiro/Desktop/anylogic.xlsx]]></Path>
-			<ReferencedFromUserCode>false</ReferencedFromUserCode>
-		</Resource>
-		<Resource>
-			<Path><![CDATA[C:/Users/Ramiro/Desktop/anylogic2.xlsx]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
 		</Resource>
 		<Resource>
