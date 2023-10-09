@@ -16,7 +16,7 @@
 		<ActiveObjectClass>
 			<Id>1694552513481</Id>
 			<Name><![CDATA[Main]]></Name>
-			<DestroyCode><![CDATA[insertInto(db_table).columns(db_table.ram_usage, db_table.number_of_servers).values(average_last_hour_ram_usage(), number_of_servers).execute();
+			<DestroyCode><![CDATA[insertInto(db_table).columns(db_table.ram_usage, db_table.number_of_servers, db_table.accepted,db_table.rejected).values(average_last_hour_ram_usage(), number_of_servers, number_of_accepted, number_of_rejected).execute();
 System.out.println(average_last_hour_ram_usage()+ ";"+ number_of_servers);]]></DestroyCode>
 			<Generic>false</Generic>
 			<GenericParameter>
@@ -137,6 +137,36 @@ System.out.println(average_last_hour_ram_usage()+ ";"+ number_of_servers);]]></D
 						<Type><![CDATA[boolean]]></Type>        
 						<InitialValue Class="CodeValue">
 							<Code><![CDATA[false]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1696853555439</Id>
+					<Name><![CDATA[number_of_accepted]]></Name>
+					<X>510</X><Y>860</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[long]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[0]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1696853921751</Id>
+					<Name><![CDATA[number_of_rejected]]></Name>
+					<X>500</X><Y>890</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[long]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[0]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -1856,6 +1886,10 @@ return value;]]></Body>
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[onExit]]></Name>
+							<Value Class="CodeValue">
+								<Code><![CDATA[number_of_accepted = delay.in.count();
+number_of_rejected  = timeout.count();]]></Code>
+							</Value>
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[onRemove]]></Name>
@@ -3554,8 +3588,8 @@ getExperimentHost().setPresentable( getEngine().getRoot() );]]></ActionCode>
 				<StopOption><![CDATA[Stop at specified time]]></StopOption>
 				<InitialDate><![CDATA[1694491200000]]></InitialDate>	
 				<InitialTime><![CDATA[0.0]]></InitialTime>	
-				<FinalDate><![CDATA[1694577600000]]></FinalDate>	
-				<FinalTime><![CDATA[1440.0]]></FinalTime>	
+				<FinalDate><![CDATA[1694494200000]]></FinalDate>	
+				<FinalTime><![CDATA[50.0]]></FinalTime>	
 			</ModelTimeProperties>
 			<BypassInitialScreen>false</BypassInitialScreen>
 		</SimulationExperiment>	
