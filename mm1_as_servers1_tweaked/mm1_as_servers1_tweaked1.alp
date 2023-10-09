@@ -582,11 +582,9 @@ System.out.println(average_last_hour_ram_usage()+ ";"+ number_of_servers);]]></D
     if (average_last_hour_ram_usage() > max_ram) {
         create_spin_up_server(server_startup_delay);
         waiting_for_startup = true;
-        number_of_servers++;
     } else if (number_of_servers > 1 && average_last_hour_ram_usage() < min_ram) {
-        create_shutdown_server(0);
+        create_shutdown_server(server_shutdown_delay);
         waiting_for_startup = false;
-        number_of_servers--;
     }
 }]]></Action>
 				</Event>
@@ -600,7 +598,7 @@ System.out.println(average_last_hour_ram_usage()+ ";"+ number_of_servers);]]></D
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Action><![CDATA[
+					<Action><![CDATA[number_of_servers++;
 var new_capacity=ram_per_server*number_of_servers;
 ram.set_capacity(new_capacity);
 waiting_for_startup=false;]]></Action>
@@ -2584,7 +2582,7 @@ return value;]]></Body>
 		<ExportSettings>
 			<ExportExcelResourceReference>
 				<PackageName><![CDATA[mm1_as_servers_tweaked]]></PackageName>
-				<ClassName><![CDATA[runs_data.xlsx]]></ClassName>
+				<ClassName><![CDATA[runs_data_ram_70.xlsx]]></ClassName>
 			</ExportExcelResourceReference>
 			<TableReference>
 				<PackageName><![CDATA[mm1_as_servers_tweaked]]></PackageName>
@@ -3556,8 +3554,8 @@ getExperimentHost().setPresentable( getEngine().getRoot() );]]></ActionCode>
 				<StopOption><![CDATA[Stop at specified time]]></StopOption>
 				<InitialDate><![CDATA[1694491200000]]></InitialDate>	
 				<InitialTime><![CDATA[0.0]]></InitialTime>	
-				<FinalDate><![CDATA[1694497200000]]></FinalDate>	
-				<FinalTime><![CDATA[100.0]]></FinalTime>	
+				<FinalDate><![CDATA[1694577600000]]></FinalDate>	
+				<FinalTime><![CDATA[1440.0]]></FinalTime>	
 			</ModelTimeProperties>
 			<BypassInitialScreen>false</BypassInitialScreen>
 		</SimulationExperiment>	
@@ -3565,7 +3563,7 @@ getExperimentHost().setPresentable( getEngine().getRoot() );]]></ActionCode>
 		<CustomExperiment>
 			<Id>1696803520460</Id>
 			<Name><![CDATA[CustomExperiment]]></Name>
-			<MaximumMemory>512</MaximumMemory>
+			<MaximumMemory>2048</MaximumMemory>
 			<CommandLineArguments><![CDATA[]]></CommandLineArguments>
 			<VmArgs><![CDATA[]]></VmArgs>
 			<Code><![CDATA[// Create Engine, initialize random number generator:
@@ -3575,11 +3573,11 @@ engine.setTimeUnit( MINUTE );
 engine.getDefaultRandomGenerator().setSeed( 1 );
 engine.setStartTime( 0.0 );
 // Set stop time:
-engine.setStopTime( 10.0 );
+engine.setStopTime( 1440.0 );
 
 // Create new root object:
 Main root = new Main( engine, null, null );
-for (int i = 1; i <= 2; i++) {
+for (int i = 1; i <= 50; i++) {
   	root.setParametersToDefaultValues();
 	engine.start( root );
 	engine.runFast();
@@ -3596,11 +3594,7 @@ System.out.println("END");]]></Code>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
 		</Resource>
 		<Resource>
-			<Path><![CDATA[C:/Users/Ramiro/Desktop/anylogic3.xlsx]]></Path>
-			<ReferencedFromUserCode>false</ReferencedFromUserCode>
-		</Resource>
-		<Resource>
-			<Path><![CDATA[runs_data.xlsx]]></Path>
+			<Path><![CDATA[runs_data_ram_70.xlsx]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
 		</Resource>
 	</ModelResources>
