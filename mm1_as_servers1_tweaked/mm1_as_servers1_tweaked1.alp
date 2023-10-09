@@ -16,6 +16,8 @@
 		<ActiveObjectClass>
 			<Id>1694552513481</Id>
 			<Name><![CDATA[Main]]></Name>
+			<DestroyCode><![CDATA[insertInto(db_table).columns(db_table.ram_usage, db_table.number_of_servers).values(average_last_hour_ram_usage(), number_of_servers).execute();
+System.out.println(average_last_hour_ram_usage()+ ";"+ number_of_servers);]]></DestroyCode>
 			<Generic>false</Generic>
 			<GenericParameter>
 				<Id>1694552513487</Id>
@@ -126,7 +128,7 @@
 				<Variable Class="PlainVariable">
 					<Id>1694554720678</Id>
 					<Name><![CDATA[waiting_for_startup]]></Name>
-					<X>390</X><Y>30</Y>
+					<X>160</X><Y>60</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -623,7 +625,7 @@ waiting_for_startup=false;]]></Action>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1695247557279</Id>
 					<Name><![CDATA[average_last_hour_ram_usage]]></Name>
-					<X>310</X><Y>70</Y>
+					<X>320</X><Y>20</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -647,7 +649,7 @@ waiting_for_startup=false;]]></Action>
 					<ReturnType><![CDATA[int]]></ReturnType>
 					<Id>1696709217191</Id>
 					<Name><![CDATA[getRamPacket]]></Name>
-					<X>160</X><Y>50</Y>
+					<X>160</X><Y>40</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -683,22 +685,22 @@ return value;]]></Body>
 					<IntervalsQuery>
 						<TableReference>
 							<PackageName><![CDATA[mm1_as_servers_tweaked]]></PackageName>
-							<ClassName><![CDATA[sheet1]]></ClassName>
+							<ClassName><![CDATA[runs_results]]></ClassName>
 						</TableReference>
 							<StartColumnReference>
 								<PackageName><![CDATA[mm1_as_servers_tweaked]]></PackageName>
-								<ClassName><![CDATA[sheet1]]></ClassName>
-								<ItemName><![CDATA[hora_ini]]></ItemName>
+								<ClassName><![CDATA[runs_results]]></ClassName>
+								<ItemName><![CDATA[ram_usage]]></ItemName>
 							</StartColumnReference>
 							<EndColumnReference>
 								<PackageName><![CDATA[mm1_as_servers_tweaked]]></PackageName>
-								<ClassName><![CDATA[sheet1]]></ClassName>
-								<ItemName><![CDATA[hora_fin]]></ItemName>
+								<ClassName><![CDATA[runs_results]]></ClassName>
+								<ItemName><![CDATA[servers_qty]]></ItemName>
 							</EndColumnReference>
 							<ValueColumnReference>
 								<PackageName><![CDATA[mm1_as_servers_tweaked]]></PackageName>
-								<ClassName><![CDATA[sheet1]]></ClassName>
-								<ItemName><![CDATA[valor]]></ItemName>
+								<ClassName><![CDATA[runs_results]]></ClassName>
+								<ItemName><![CDATA[servers_qty]]></ItemName>
 							</ValueColumnReference>
 					</IntervalsQuery>
 					<Intervals>
@@ -2574,42 +2576,20 @@ return value;]]></Body>
 		<Height>600</Height>
 	</Frame>
 	<Database>
-		<Logging>false</Logging>
-		<AutoExport>false</AutoExport>
-		<ShutdownCompact>false</ShutdownCompact>
+		<Logging>true</Logging>
+		<AutoExport>true</AutoExport>
+		<ShutdownCompact>true</ShutdownCompact>
 		<ImportSettings>
-			<ExternalConnection>
-				<Id>1696708767053</Id>
-				<Name><![CDATA[database]]></Name>
-				<X>0</X><Y>0</Y>
-				<Label><X>10</X><Y>0</Y></Label>
-				<PublicFlag>false</PublicFlag>
-				<PresentationFlag>true</PresentationFlag>
-				<ShowLabel>true</ShowLabel>
-				<DatabaseType>EXCEL_ACCESS</DatabaseType>
-				<ConnectionURL><![CDATA[]]></ConnectionURL>
-				<ConnectOnStartup>true</ConnectOnStartup>
-				<DatabaseName><![CDATA[]]></DatabaseName>
-				<ResourceReference>
-					<PackageName><![CDATA[mm1_as_servers_tweaked]]></PackageName>
-					<ClassName><![CDATA[C:/Users/Ramiro/Desktop/anylogic3.xlsx]]></ClassName>
-				</ResourceReference>
-				<Host><![CDATA[localhost]]></Host>
-				<JdbcDriverClassName><![CDATA[net.sourceforge.jtds.jdbc.Driver]]></JdbcDriverClassName>
-				<Login><![CDATA[]]></Login>
-				<Password><![CDATA[]]></Password>
-			</ExternalConnection>
-			<TableImportSettings>
-				<TableReference>
-					<PackageName><![CDATA[mm1_as_servers_tweaked]]></PackageName>
-					<ClassName><![CDATA[sheet1]]></ClassName>
-				</TableReference>
-				<ConnectionIndex>0</ConnectionIndex>
-				<ExternalTableName><![CDATA["Sheet1"]]></ExternalTableName>
-				<AutoImport>false</AutoImport>
-			</TableImportSettings>
 		</ImportSettings>
 		<ExportSettings>
+			<ExportExcelResourceReference>
+				<PackageName><![CDATA[mm1_as_servers_tweaked]]></PackageName>
+				<ClassName><![CDATA[runs_data.xlsx]]></ClassName>
+			</ExportExcelResourceReference>
+			<TableReference>
+				<PackageName><![CDATA[mm1_as_servers_tweaked]]></PackageName>
+				<ClassName><![CDATA[db_table]]></ClassName>
+			</TableReference>
 		</ExportSettings>
 	</Database>
 	
@@ -2635,6 +2615,14 @@ return value;]]></Body>
 		<Inputs>		
 		</Inputs>
 		<Outputs>
+    		<RunConfigurationOutput>
+				<Id>1696801745274</Id>
+				<Name><![CDATA[Runs_data]]></Name>
+				<OutputReference>
+					<PackageName><![CDATA[mm1_as_servers_tweaked]]></PackageName>
+					<ClassName><![CDATA[runs_data.xlsx]]></ClassName>
+				</OutputReference>
+    		</RunConfigurationOutput>
 		</Outputs>
 	</RunConfiguration>
 	<Experiments>	
@@ -2643,7 +2631,7 @@ return value;]]></Body>
 			<Id>1694552513490</Id>
 			<Name><![CDATA[Simulation]]></Name>
 			<CommandLineArguments><![CDATA[]]></CommandLineArguments>
-			<MaximumMemory>8192</MaximumMemory>
+			<MaximumMemory>512</MaximumMemory>
 			<RandomNumberGenerationType>randomSeed</RandomNumberGenerationType>
 			<CustomGeneratorCode>new Random()</CustomGeneratorCode>
 			<SeedValue>1</SeedValue>
@@ -3558,21 +3546,49 @@ getExperimentHost().setPresentable( getEngine().getRoot() );]]></ActionCode>
 			</Parameters>			
 			<PresentationProperties>
 				<EnableZoomAndPanning>true</EnableZoomAndPanning>
-				<ExecutionMode><![CDATA[realTimeScaled]]></ExecutionMode>
+				<ExecutionMode><![CDATA[virtualTime]]></ExecutionMode>
 				<Title><![CDATA[Horizontal server scaling : Simulacion 2023 UTN FRRo]]></Title>	
 				<EnableDeveloperPanel>true</EnableDeveloperPanel>
 				<ShowDeveloperPanelOnStart>false</ShowDeveloperPanelOnStart>
-				<RealTimeScale>5.0</RealTimeScale>
+				<RealTimeScale>500.0</RealTimeScale>
 			</PresentationProperties>
 			<ModelTimeProperties>
-				<StopOption><![CDATA[Never]]></StopOption>
+				<StopOption><![CDATA[Stop at specified time]]></StopOption>
 				<InitialDate><![CDATA[1694491200000]]></InitialDate>	
 				<InitialTime><![CDATA[0.0]]></InitialTime>	
-				<FinalDate><![CDATA[1697068800000]]></FinalDate>	
+				<FinalDate><![CDATA[1694497200000]]></FinalDate>	
 				<FinalTime><![CDATA[100.0]]></FinalTime>	
 			</ModelTimeProperties>
 			<BypassInitialScreen>false</BypassInitialScreen>
 		</SimulationExperiment>	
+		<!--   =========  Custom Experiment   ========  -->
+		<CustomExperiment>
+			<Id>1696803520460</Id>
+			<Name><![CDATA[CustomExperiment]]></Name>
+			<MaximumMemory>512</MaximumMemory>
+			<CommandLineArguments><![CDATA[]]></CommandLineArguments>
+			<VmArgs><![CDATA[]]></VmArgs>
+			<Code><![CDATA[// Create Engine, initialize random number generator:
+Engine engine = createEngine();
+engine.setTimeUnit( MINUTE );
+// Fixed seed (reproducible simulation runs)
+engine.getDefaultRandomGenerator().setSeed( 1 );
+engine.setStartTime( 0.0 );
+// Set stop time:
+engine.setStopTime( 10.0 );
+
+// Create new root object:
+Main root = new Main( engine, null, null );
+for (int i = 1; i <= 2; i++) {
+  	root.setParametersToDefaultValues();
+	engine.start( root );
+	engine.runFast();
+	engine.stop();
+	 root = new Main( engine, null, null );
+}
+engine.stop();
+System.out.println("END");]]></Code>
+		</CustomExperiment>
 	</Experiments>
 	<ModelResources>
 		<Resource>
@@ -3581,6 +3597,10 @@ getExperimentHost().setPresentable( getEngine().getRoot() );]]></ActionCode>
 		</Resource>
 		<Resource>
 			<Path><![CDATA[C:/Users/Ramiro/Desktop/anylogic3.xlsx]]></Path>
+			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+		</Resource>
+		<Resource>
+			<Path><![CDATA[runs_data.xlsx]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
 		</Resource>
 	</ModelResources>
