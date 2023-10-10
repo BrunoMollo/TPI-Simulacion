@@ -4,7 +4,7 @@
 	         AnyLogic Project File 
 *************************************************	         
 -->
-<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.8.4.202307181709" AlpVersion="8.8.2">
+<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.8.4.202307181718" AlpVersion="8.8.2">
 <Model>
 	<Id>1694552513478</Id>
 	<Name><![CDATA[mm1_as_servers1_tweaked1]]></Name>
@@ -16,8 +16,26 @@
 		<ActiveObjectClass>
 			<Id>1694552513481</Id>
 			<Name><![CDATA[Main]]></Name>
-			<DestroyCode><![CDATA[insertInto(db_table).columns(db_table.ram_usage, db_table.number_of_servers, db_table.accepted,db_table.rejected).values(average_last_hour_ram_usage(), number_of_servers, number_of_accepted, number_of_rejected).execute();
-System.out.println(average_last_hour_ram_usage()+ ";"+ number_of_servers);]]></DestroyCode>
+			<DestroyCode><![CDATA[insertInto(db_table)
+	.columns(
+		db_table.average_ram_usage, 
+		db_table.average_number_of_servers,
+		db_table.average_server_cost, 
+		db_table.accepted,
+		db_table.rejected, 
+		db_table.average_wait_time,
+		db_table.average_requests_in_queue, 
+		db_table.num_server_integral)
+	.values(
+		statistics_ram_usage.mean(), 
+		statistics_number_of_servers.mean(),
+		statistics_server_cost.integral(), 
+		number_of_accepted, 
+		number_of_rejected, 
+		end.dataset.getYMean(),
+		statistics_requests_in_queue.mean(),
+		statistics_number_of_servers.integral())
+	.execute();]]></DestroyCode>
 			<Generic>false</Generic>
 			<GenericParameter>
 				<Id>1694552513487</Id>
@@ -121,14 +139,14 @@ System.out.println(average_last_hour_ram_usage()+ ";"+ number_of_servers);]]></D
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[int]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA[1]]></Code>
+							<Code><![CDATA[5]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
 				<Variable Class="PlainVariable">
 					<Id>1694554720678</Id>
 					<Name><![CDATA[waiting_for_startup]]></Name>
-					<X>160</X><Y>60</Y>
+					<X>480</X><Y>225</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -143,7 +161,7 @@ System.out.println(average_last_hour_ram_usage()+ ";"+ number_of_servers);]]></D
 				<Variable Class="PlainVariable">
 					<Id>1696853555439</Id>
 					<Name><![CDATA[number_of_accepted]]></Name>
-					<X>510</X><Y>860</Y>
+					<X>710</X><Y>690</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -158,7 +176,7 @@ System.out.println(average_last_hour_ram_usage()+ ";"+ number_of_servers);]]></D
 				<Variable Class="PlainVariable">
 					<Id>1696853921751</Id>
 					<Name><![CDATA[number_of_rejected]]></Name>
-					<X>500</X><Y>890</Y>
+					<X>710</X><Y>720</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -167,6 +185,21 @@ System.out.println(average_last_hour_ram_usage()+ ";"+ number_of_servers);]]></D
 						<Type><![CDATA[long]]></Type>        
 						<InitialValue Class="CodeValue">
 							<Code><![CDATA[0]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1696880406180</Id>
+					<Name><![CDATA[waiting_for_shutdown]]></Name>
+					<X>480</X><Y>255</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[boolean]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[false]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -302,8 +335,35 @@ System.out.println(average_last_hour_ram_usage()+ ";"+ number_of_servers);]]></D
 						<Type><![CDATA[double]]></Type>
 						<UnitType><![CDATA[NONE]]></UnitType>
 						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[1000]]></Code>
+						</DefaultValue>
 						<ParameterEditor>
 							<Id>1696717349624</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1696899369290</Id>
+					<Name><![CDATA[server_cost_per_minute]]></Name>
+					<X>310</X><Y>70</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[0.03333333]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1696899369288</Id>
 							<EditorContolType>TEXT_BOX</EditorContolType>
 							<MinSliderValue><![CDATA[0]]></MinSliderValue>
 							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
@@ -610,13 +670,16 @@ System.out.println(average_last_hour_ram_usage()+ ";"+ number_of_servers);]]></D
 					</Properties>
 					<Action><![CDATA[if (!waiting_for_startup && number_of_servers < server_instance_limit) {
     if (average_last_hour_ram_usage() > max_ram) {
-        create_spin_up_server(server_startup_delay);
-        waiting_for_startup = true;
-    } else if (number_of_servers > 1 && average_last_hour_ram_usage() < min_ram) {
-        create_shutdown_server(server_shutdown_delay);
-        waiting_for_startup = false;
-    }
-}]]></Action>
+    	waiting_for_startup = true;
+        create_spin_up_server(server_startup_delay);   
+    } 
+if (!waiting_for_shutdown && number_of_servers > 1 && average_last_hour_ram_usage() < min_ram) {
+    waiting_for_startup = false;
+    waiting_for_shutdown = true;
+    create_shutdown_server(server_shutdown_delay);   
+   }
+}
+]]></Action>
 				</Event>
 			</Events>
 			<DynamicEvents>
@@ -644,7 +707,7 @@ waiting_for_startup=false;]]></Action>
 					<Action><![CDATA[number_of_servers--;
 var new_capacity=ram_per_server*number_of_servers;
 ram.set_capacity(new_capacity);
-waiting_for_startup=false;]]></Action>
+waiting_for_shutdown=false;]]></Action>
 				</DynamicEventClass>
 			</DynamicEvents>
 			<Functions>
@@ -658,7 +721,7 @@ waiting_for_startup=false;]]></Action>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[return (last_hour_ram_usage.getYMean()/(ram_per_server*number_of_servers))*100;]]></Body>
+					<Body><![CDATA[return limitMax((last_hour_ram_usage.getYMean() / (number_of_servers*ram_per_server))*100, 100.0);]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
@@ -682,7 +745,7 @@ waiting_for_startup=false;]]></Action>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[int value = (int) Math.floor(abs(normal(300,60)));
+					<Body><![CDATA[int value = (int) Math.floor(abs(normal(150,60)));
 return value;]]></Body>
 				</Function>
 			</Functions>
@@ -861,7 +924,7 @@ return value;]]></Body>
     			<DataSet>
 					<Id>1696710086510</Id>
 					<Name><![CDATA[last_hour_ram_usage]]></Name>
-					<X>500</X><Y>-160</Y>
+					<X>480</X><Y>-190</Y>
 					<Label><X>15</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -881,6 +944,94 @@ return value;]]></Body>
 					<VerticalAxisExpression><![CDATA[ram.busy()]]></VerticalAxisExpression>
 					<SamplesToKeep>60</SamplesToKeep>
 				</DataSet>
+    			<Statistics>
+					<Id>1696881477535</Id>
+					<Name><![CDATA[statistics_number_of_servers]]></Name>
+					<X>480</X><Y>-100</Y>
+					<Label><X>15</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>false</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<AutoUpdate>true</AutoUpdate>
+					<OccurrenceAtTime>true</OccurrenceAtTime>
+					<OccurrenceDate>1696924800000</OccurrenceDate>
+					<OccurrenceTime Class="CodeUnitValue">
+						<Code><![CDATA[5]]></Code>
+						<Unit Class="TimeUnits"><![CDATA[MINUTE]]></Unit>
+					</OccurrenceTime>
+					<RecurrenceCode Class="CodeUnitValue">
+						<Code><![CDATA[1]]></Code>
+						<Unit Class="TimeUnits"><![CDATA[MINUTE]]></Unit>
+					</RecurrenceCode>
+					<Discrete>false</Discrete>
+					<ValueCode><![CDATA[number_of_servers]]></ValueCode>
+				</Statistics>
+    			<Statistics>
+					<Id>1696881655313</Id>
+					<Name><![CDATA[statistics_ram_usage]]></Name>
+					<X>480</X><Y>-70</Y>
+					<Label><X>15</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<AutoUpdate>true</AutoUpdate>
+					<OccurrenceAtTime>true</OccurrenceAtTime>
+					<OccurrenceDate>1696924800000</OccurrenceDate>
+					<OccurrenceTime Class="CodeUnitValue">
+						<Code><![CDATA[5]]></Code>
+						<Unit Class="TimeUnits"><![CDATA[MINUTE]]></Unit>
+					</OccurrenceTime>
+					<RecurrenceCode Class="CodeUnitValue">
+						<Code><![CDATA[1]]></Code>
+						<Unit Class="TimeUnits"><![CDATA[MINUTE]]></Unit>
+					</RecurrenceCode>
+					<Discrete>false</Discrete>
+					<ValueCode><![CDATA[average_last_hour_ram_usage()]]></ValueCode>
+				</Statistics>
+    			<Statistics>
+					<Id>1696881773042</Id>
+					<Name><![CDATA[statistics_server_cost]]></Name>
+					<X>480</X><Y>-40</Y>
+					<Label><X>15</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<AutoUpdate>true</AutoUpdate>
+					<OccurrenceAtTime>true</OccurrenceAtTime>
+					<OccurrenceDate>1696924800000</OccurrenceDate>
+					<OccurrenceTime Class="CodeUnitValue">
+						<Code><![CDATA[5]]></Code>
+						<Unit Class="TimeUnits"><![CDATA[MINUTE]]></Unit>
+					</OccurrenceTime>
+					<RecurrenceCode Class="CodeUnitValue">
+						<Code><![CDATA[1]]></Code>
+						<Unit Class="TimeUnits"><![CDATA[MINUTE]]></Unit>
+					</RecurrenceCode>
+					<Discrete>false</Discrete>
+					<ValueCode><![CDATA[number_of_servers*server_cost_per_minute]]></ValueCode>
+				</Statistics>
+    			<Statistics>
+					<Id>1696882667779</Id>
+					<Name><![CDATA[statistics_requests_in_queue]]></Name>
+					<X>480</X><Y>-130</Y>
+					<Label><X>15</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<AutoUpdate>true</AutoUpdate>
+					<OccurrenceAtTime>true</OccurrenceAtTime>
+					<OccurrenceDate>1696924800000</OccurrenceDate>
+					<OccurrenceTime Class="CodeUnitValue">
+						<Code><![CDATA[5]]></Code>
+						<Unit Class="TimeUnits"><![CDATA[MINUTE]]></Unit>
+					</OccurrenceTime>
+					<RecurrenceCode Class="CodeUnitValue">
+						<Code><![CDATA[1]]></Code>
+						<Unit Class="TimeUnits"><![CDATA[MINUTE]]></Unit>
+					</RecurrenceCode>
+					<Discrete>false</Discrete>
+					<ValueCode><![CDATA[delay.size()]]></ValueCode>
+				</Statistics>
 			</AnalysisData>
 			<AgentLinks>
 				<AgentLink>
@@ -1520,6 +1671,7 @@ return value;]]></Body>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
+					<PresentationId>1696973015857</PresentationId>
 					<ActiveObjectClass>
 						<PackageName><![CDATA[com.anylogic.libraries.processmodeling]]></PackageName>
 						<ClassName><![CDATA[TimeMeasureEnd]]></ClassName>
@@ -2146,12 +2298,12 @@ number_of_rejected  = timeout.count();]]></Code>
 					<OccurrenceAtTime>true</OccurrenceAtTime>
 					<OccurrenceDate>1694592000000</OccurrenceDate>
 					<OccurrenceTime Class="CodeUnitValue">
-						<Code><![CDATA[0]]></Code>
-						<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
+						<Code><![CDATA[5]]></Code>
+						<Unit Class="TimeUnits"><![CDATA[MINUTE]]></Unit>
 					</OccurrenceTime>
 					<RecurrenceCode Class="CodeUnitValue">
 						<Code><![CDATA[1]]></Code>
-						<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
+						<Unit Class="TimeUnits"><![CDATA[MINUTE]]></Unit>
 					</RecurrenceCode>
 					<EmbeddedIcon>false</EmbeddedIcon>
 					<Width>560</Width>
@@ -2213,8 +2365,8 @@ number_of_rejected  = timeout.count();]]></Code>
 					<OccurrenceAtTime>true</OccurrenceAtTime>
 					<OccurrenceDate>1694592000000</OccurrenceDate>
 					<OccurrenceTime Class="CodeUnitValue">
-						<Code><![CDATA[0]]></Code>
-						<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
+						<Code><![CDATA[5]]></Code>
+						<Unit Class="TimeUnits"><![CDATA[MINUTE]]></Unit>
 					</OccurrenceTime>
 					<RecurrenceCode Class="CodeUnitValue">
 						<Code><![CDATA[1]]></Code>
@@ -2280,7 +2432,7 @@ number_of_rejected  = timeout.count();]]></Code>
 					<OccurrenceAtTime>true</OccurrenceAtTime>
 					<OccurrenceDate>1694592000000</OccurrenceDate>
 					<OccurrenceTime Class="CodeUnitValue">
-						<Code><![CDATA[0]]></Code>
+						<Code><![CDATA[5]]></Code>
 						<Unit Class="TimeUnits"><![CDATA[MINUTE]]></Unit>
 					</OccurrenceTime>
 					<RecurrenceCode Class="CodeUnitValue">
@@ -2347,8 +2499,8 @@ number_of_rejected  = timeout.count();]]></Code>
 					<OccurrenceAtTime>true</OccurrenceAtTime>
 					<OccurrenceDate>1694592000000</OccurrenceDate>
 					<OccurrenceTime Class="CodeUnitValue">
-						<Code><![CDATA[0]]></Code>
-						<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
+						<Code><![CDATA[5]]></Code>
+						<Unit Class="TimeUnits"><![CDATA[MINUTE]]></Unit>
 					</OccurrenceTime>
 					<RecurrenceCode Class="CodeUnitValue">
 						<Code><![CDATA[1]]></Code>
@@ -2380,11 +2532,11 @@ number_of_rejected  = timeout.count();]]></Code>
 					</Labels>
 					<ShowLegend>true</ShowLegend>
 					<ShowPDF>true</ShowPDF>
-					<ShowCDF>true</ShowCDF>
+					<ShowCDF>false</ShowCDF>
 					<ShowMean>true</ShowMean>
 					<Bars>
 						<Direction>UP</Direction>
-						<RelativeWidth>0.2</RelativeWidth>
+						<RelativeWidth>0.4</RelativeWidth>
 					</Bars>
 					<HistogramDataExpression>
 					<Id>1694558143621</Id>
@@ -2478,7 +2630,7 @@ number_of_rejected  = timeout.count();]]></Code>
 					<OccurrenceAtTime>true</OccurrenceAtTime>
 					<OccurrenceDate>1696752000000</OccurrenceDate>
 					<OccurrenceTime Class="CodeUnitValue">
-						<Code><![CDATA[0]]></Code>
+						<Code><![CDATA[5]]></Code>
 						<Unit Class="TimeUnits"><![CDATA[MINUTE]]></Unit>
 					</OccurrenceTime>
 					<RecurrenceCode Class="CodeUnitValue">
@@ -2545,7 +2697,7 @@ number_of_rejected  = timeout.count();]]></Code>
 					<OccurrenceAtTime>true</OccurrenceAtTime>
 					<OccurrenceDate>1696752000000</OccurrenceDate>
 					<OccurrenceTime Class="CodeUnitValue">
-						<Code><![CDATA[0]]></Code>
+						<Code><![CDATA[5]]></Code>
 						<Unit Class="TimeUnits"><![CDATA[MINUTE]]></Unit>
 					</OccurrenceTime>
 					<RecurrenceCode Class="CodeUnitValue">
@@ -2589,6 +2741,25 @@ number_of_rejected  = timeout.count();]]></Code>
 						<Title><![CDATA[Rejected]]></Title>
 					</DataItem>
     			</PieChart>
+				<EmbeddedObjectPresentation>
+					<Id>1696973015857</Id>
+					<Name><![CDATA[end_presentation]]></Name>
+					<X>0</X><Y>0</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<DrawingMode>AGENT_CURRENT_POSITION</DrawingMode>
+					<ScaleType>AUTOMATICALLY_CALCULATED</ScaleType>
+					<GISScaleForRealEmbeddedObjectPresentationSize>1000</GISScaleForRealEmbeddedObjectPresentationSize>
+					<GISScaleForFixedEmbeddedObjectPresentationSize>1000000000</GISScaleForFixedEmbeddedObjectPresentationSize>
+					<Latitude>0.0</Latitude>
+					<Longitude>0.0</Longitude>
+				</EmbeddedObjectPresentation>
 			</Presentation>
 
 				</Level>
@@ -2608,7 +2779,7 @@ number_of_rejected  = timeout.count();]]></Code>
 		<Height>600</Height>
 	</Frame>
 	<Database>
-		<Logging>true</Logging>
+		<Logging>false</Logging>
 		<AutoExport>true</AutoExport>
 		<ShutdownCompact>true</ShutdownCompact>
 		<ImportSettings>
@@ -2616,7 +2787,7 @@ number_of_rejected  = timeout.count();]]></Code>
 		<ExportSettings>
 			<ExportExcelResourceReference>
 				<PackageName><![CDATA[mm1_as_servers_tweaked]]></PackageName>
-				<ClassName><![CDATA[runs_data_ram_70.xlsx]]></ClassName>
+				<ClassName><![CDATA[runs_data_ram_90.xlsx]]></ClassName>
 			</ExportExcelResourceReference>
 			<TableReference>
 				<PackageName><![CDATA[mm1_as_servers_tweaked]]></PackageName>
@@ -2628,7 +2799,7 @@ number_of_rejected  = timeout.count();]]></Code>
 	<RunConfiguration ActiveObjectClassId="1694552513481">
 		<Id>1694552513493</Id>
 		<Name><![CDATA[RunConfiguration]]></Name>
-		<MaximumMemory>512</MaximumMemory>
+		<MaximumMemory>2048</MaximumMemory>
 		<ModelTimeProperties>
 			<StopOption><![CDATA[Stop at specified time]]></StopOption>
 			<InitialDate><![CDATA[1694476800000]]></InitialDate>	
@@ -2638,7 +2809,7 @@ number_of_rejected  = timeout.count();]]></Code>
 		</ModelTimeProperties>
 		<AnimationProperties>
 			<StopNever>true</StopNever>
-			<ExecutionMode>realTimeScaled</ExecutionMode>
+			<ExecutionMode>virtualTime</ExecutionMode>
 			<RealTimeScale>1.0</RealTimeScale>
 			<EnableZoomAndPanning>true</EnableZoomAndPanning>
 			<EnableDeveloperPanel>false</EnableDeveloperPanel>
@@ -2663,7 +2834,7 @@ number_of_rejected  = timeout.count();]]></Code>
 			<Id>1694552513490</Id>
 			<Name><![CDATA[Simulation]]></Name>
 			<CommandLineArguments><![CDATA[]]></CommandLineArguments>
-			<MaximumMemory>512</MaximumMemory>
+			<MaximumMemory>2048</MaximumMemory>
 			<RandomNumberGenerationType>randomSeed</RandomNumberGenerationType>
 			<CustomGeneratorCode>new Random()</CustomGeneratorCode>
 			<SeedValue>1</SeedValue>
@@ -3575,6 +3746,9 @@ getExperimentHost().setPresentable( getEngine().getRoot() );]]></ActionCode>
 						<Code><![CDATA[checkbox.isSelected()?server_instance_limit_slider.getIntValue():1000]]></Code>
 					</ParameterValue>
 				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[server_cost_per_minute]]></ParameterName>
+				</Parameter>
 			</Parameters>			
 			<PresentationProperties>
 				<EnableZoomAndPanning>true</EnableZoomAndPanning>
@@ -3585,11 +3759,11 @@ getExperimentHost().setPresentable( getEngine().getRoot() );]]></ActionCode>
 				<RealTimeScale>500.0</RealTimeScale>
 			</PresentationProperties>
 			<ModelTimeProperties>
-				<StopOption><![CDATA[Stop at specified time]]></StopOption>
+				<StopOption><![CDATA[Never]]></StopOption>
 				<InitialDate><![CDATA[1694491200000]]></InitialDate>	
 				<InitialTime><![CDATA[0.0]]></InitialTime>	
-				<FinalDate><![CDATA[1694494200000]]></FinalDate>	
-				<FinalTime><![CDATA[50.0]]></FinalTime>	
+				<FinalDate><![CDATA[1694577600000]]></FinalDate>	
+				<FinalTime><![CDATA[1440.0]]></FinalTime>	
 			</ModelTimeProperties>
 			<BypassInitialScreen>false</BypassInitialScreen>
 		</SimulationExperiment>	
@@ -3597,7 +3771,7 @@ getExperimentHost().setPresentable( getEngine().getRoot() );]]></ActionCode>
 		<CustomExperiment>
 			<Id>1696803520460</Id>
 			<Name><![CDATA[CustomExperiment]]></Name>
-			<MaximumMemory>2048</MaximumMemory>
+			<MaximumMemory>8192</MaximumMemory>
 			<CommandLineArguments><![CDATA[]]></CommandLineArguments>
 			<VmArgs><![CDATA[]]></VmArgs>
 			<Code><![CDATA[// Create Engine, initialize random number generator:
@@ -3611,7 +3785,7 @@ engine.setStopTime( 1440.0 );
 
 // Create new root object:
 Main root = new Main( engine, null, null );
-for (int i = 1; i <= 50; i++) {
+for (int i = 1; i <= 3; i++) {
   	root.setParametersToDefaultValues();
 	engine.start( root );
 	engine.runFast();
@@ -3621,6 +3795,51 @@ for (int i = 1; i <= 50; i++) {
 engine.stop();
 System.out.println("END");]]></Code>
 		</CustomExperiment>
+		<!--   =========  Custom Experiment   ========  -->
+		<CustomExperiment>
+			<Id>1696878134367</Id>
+			<Name><![CDATA[ServerEvaluation]]></Name>
+			<MaximumMemory>8192</MaximumMemory>
+			<CommandLineArguments><![CDATA[]]></CommandLineArguments>
+			<VmArgs><![CDATA[]]></VmArgs>
+			<Code><![CDATA[int i = 0;
+// Create Engine:
+Engine engine = createEngine();
+engine.setTimeUnit( MINUTE );
+engine.setStartTime( 0.0 ); 
+engine.setStopTime( 60.0 * 24 );
+
+// Non fixed seed (different simulation runs):
+int newSeed = (int) Math.floor(Math.random());
+engine.getDefaultRandomGenerator().setSeed(newSeed);
+
+for( i=0; i<100; i++) {
+	// Create new root object:
+	Main root = new Main( engine, null, null );
+	System.out.println("Starting Iteration " + i);
+	
+	// TODO Setup parameters of root object here
+	root.setParametersToDefaultValues();
+	root.max_ram = 90;
+	root.min_ram = 20;
+	root.ram_per_server = 320;
+	root.server_startup_delay = 5;
+	root.server_shutdown_delay = 2;
+	root.server_instance_limit = 1000;
+	root.server_cost_per_minute = 0.0333333;
+	root.number_of_servers = 8;
+
+	// Prepare Engine for simulation:
+	engine.start( root );
+	// Start simulation in fast mode:
+	engine.runFast();
+	// Storing results of simulation in Excel file?
+	
+	// Destroy the model:
+	engine.stop();
+}
+System.out.println("END");]]></Code>
+		</CustomExperiment>
 	</Experiments>
 	<ModelResources>
 		<Resource>
@@ -3628,7 +3847,7 @@ System.out.println("END");]]></Code>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
 		</Resource>
 		<Resource>
-			<Path><![CDATA[runs_data_ram_70.xlsx]]></Path>
+			<Path><![CDATA[runs_data_ram_90.xlsx]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
 		</Resource>
 	</ModelResources>
