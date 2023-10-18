@@ -10,15 +10,14 @@ En este repositorio subiremos el archivo .alp generado por AnyLogic (el cuál te
   <img src="mm1_as_servers1_tweaked/image1.png" align = "center"/>  
 </p>
 
-# Integrantes           Legajo
-- Facundo Braida        46095
-- Ramiro Di Giacinti    47772
-- Bruno Mollo           47773
-- Adriel Gorosito       47066
-- Lucía Cappellini      47799
+# Integrantes
+- Facundo Braida - 46095
+- Ramiro Di Giacinti - 47772
+- Bruno Mollo - 47773
+- Adriel Gorosito - 47066
+- Lucía Cappellini - 47799
 
 # Profesores:
 -  Leale, Guillermo
 -  Flamini, Jorge
 -  Torres, Juan Ignacio
-
